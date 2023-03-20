@@ -1,14 +1,17 @@
 package u03
 
-object Lists extends App :
+import scala.annotation.tailrec
+
+object Lists extends App:
 
   // A generic linkedlist
   enum List[E]:
     case Cons(head: E, tail: List[E])
     case Nil()
+
   // a companion object (i.e., module) for List
   object List:
-    
+
     def sum(l: List[Int]): Int = l match
       case Cons(h, t) => h + sum(t)
       case _ => 0
@@ -21,6 +24,13 @@ object Lists extends App :
       case Cons(h, t) if pred(h) => Cons(h, filter(t)(pred))
       case Cons(_, t) => filter(t)(pred)
       case Nil() => Nil()
+
+    @tailrec
+    def drop[A](l: List[A], n: Int): List[A] = (l, n) match
+      case (Nil(), _) => Nil()
+      case (l, 0) => l
+      case (Cons(_, t), n) => drop(t, n - 1)
+
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
