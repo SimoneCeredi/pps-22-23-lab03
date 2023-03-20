@@ -31,9 +31,9 @@ object Lists extends App:
       case (l, 0) => l
       case (Cons(_, t), n) => drop(t, n - 1)
 
-    def append[A](l: List[A], t: List[A]): List[A] = l match
-      case Cons(h, tail) => Cons(h, append(tail, t))
-      case Nil() => t
+    def append[A](left: List[A], right: List[A]): List[A] = left match
+      case Cons(h, t) => Cons(h, append(t, right))
+      case Nil() => right
 
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
