@@ -42,7 +42,7 @@ object Lists extends App:
         case Nil() => flatMap(t)(f)
       case Nil() => Nil()
 
-    
+
     def mapWithFM[A, B](l: List[A])(f: A => B): List[B] = l match
       case Cons(h, t) => flatMap(Cons(h, t))(x => Cons(f(x), Nil()))
       case Nil() => Nil()
@@ -70,6 +70,15 @@ object Lists extends App:
         case Teacher(_, course) => Cons(course, Nil())
         case Student(_, _) => Nil()
       )
+
+    @tailrec
+    def foldLeft[A, B](l: List[A])(default: B)(op: (B, A) => B): B = l match
+      case Cons(h, t) => foldLeft(t)(op(default, h))(op)
+      case Nil() => default
+
+    def foldRight[A, B](l: List[A])(default: B)(op: (A, B) => B): B = l match
+      case Cons(h, t) => op(h, foldRight(t)(default)(op))
+      case Nil() => default
 
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))

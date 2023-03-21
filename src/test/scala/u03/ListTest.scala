@@ -51,3 +51,8 @@ class ListTest:
 
   @Test def testPersonList() =
     assertEquals(Cons("pps", Cons("pps", Cons("pcd", Nil()))), getCourses(Cons(Student("A", 2022), Cons(Teacher("B", "pps"), Cons(Teacher("C", "pps"), Cons(Teacher("D", "pcd"), Nil()))))))
+
+  @Test def testFolds() =
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    assertEquals(-16, foldLeft(lst)(0)(_ - _))
+    assertEquals(-8, foldRight(lst)(0)(_ - _))
