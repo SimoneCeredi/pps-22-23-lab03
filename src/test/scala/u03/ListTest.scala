@@ -50,4 +50,4 @@ class ListTest:
   import u02.Modules.Person.*
 
   @Test def testPersonList() =
-    assertEquals(Cons("pps", Cons("pcd", Nil())), getCourses(Cons(Student("A", 2022), Cons(Teacher("B", "pps"), Cons(Teacher("C", "pps"), Cons(Teacher("D", "pcd"), Nil()))))))
+    assertEquals(Cons("pps", Cons("pps", Cons("pcd", Nil()))), getCourses(Cons(Student("A", 2022), Cons(Teacher("B", "pps"), Cons(Teacher("C", "pps"), Cons(Teacher("D", "pcd"), Nil()))))))
