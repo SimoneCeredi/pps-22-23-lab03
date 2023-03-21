@@ -14,10 +14,6 @@ class ListTest:
     assertEquals(0, sum(Nil()))
     assertEquals(60, sum(l))
 
-  @Test def testFilter() =
-    assertEquals(Cons(20, Cons(30, Nil())), filter(l)(_ >= 20))
-    assertEquals(Cons(10, Cons(30, Nil())), filter(l)(_ != 20))
-
   @Test def testDrop() =
     assertEquals(Cons(20, Cons(30, Nil())), drop(l, 1))
     assertEquals(Cons(30, Nil()), drop(l, 2))
@@ -39,3 +35,8 @@ class ListTest:
     assertEquals(Cons(11, Cons(21, Cons(31, Nil()))), mapWithFM(l)(_ + 1))
     assertEquals(Cons("10", Cons("20", Cons("30", Nil()))), mapWithFM(l)(_ + ""))
 
+  @Test def testFilter() =
+    assertEquals(Cons(20, Cons(30, Nil())), filter(l)(_ >= 20))
+    assertEquals(Cons(10, Cons(30, Nil())), filter(l)(_ != 20))
+    assertEquals(Cons(20, Cons(30, Nil())), filterWithFM(l)(_ >= 20))
+    assertEquals(Cons(10, Cons(30, Nil())), filterWithFM(l)(_ != 20))

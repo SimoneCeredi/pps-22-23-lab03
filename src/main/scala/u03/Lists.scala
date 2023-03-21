@@ -38,12 +38,18 @@ object Lists extends App:
     def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = l match
       case Cons(h, t) => f(h) match
         case Cons(head, tail) => append(Cons(head, tail), flatMap(t)(f))
-        case Nil() => Nil()
+        case Nil() => flatMap(t)(f)
       case Nil() => Nil()
 
     def mapWithFM[A, B](l: List[A])(f: A => B): List[B] = l match
-      case list => flatMap(list)(a => Cons(f(a), Nil()))
+      case Cons(h, t) => flatMap(Cons(h, t))(x => Cons(f(x), Nil()))
       case Nil() => Nil()
+
+    def filterWithFM[A](l: List[A])(pred: A => Boolean): List[A] =
+      flatMap(l)(x => pred(x) match
+        case true => Cons(x, Nil())
+        case false => Nil()
+      )
 
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
