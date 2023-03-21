@@ -1,5 +1,6 @@
 package u03
 
+
 import scala.annotation.tailrec
 
 object Lists extends App:
@@ -41,6 +42,7 @@ object Lists extends App:
         case Nil() => flatMap(t)(f)
       case Nil() => Nil()
 
+    
     def mapWithFM[A, B](l: List[A])(f: A => B): List[B] = l match
       case Cons(h, t) => flatMap(Cons(h, t))(x => Cons(f(x), Nil()))
       case Nil() => Nil()
@@ -59,6 +61,15 @@ object Lists extends App:
         case Some(x: Int) if x > h => Some(x)
         case _ => Some(h)
       case Nil() => None()
+
+    import u02.Modules.Person
+    import u02.Modules.Person.*
+
+    def getCourses(l: List[Person]): List[String] =
+      flatMap(l)(p => p match
+        case Teacher(_, course) => Cons(course, Nil())
+        case Student(_, _) => Nil()
+      )
 
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))

@@ -3,6 +3,7 @@ package u03
 import org.junit.*
 import org.junit.Assert.*
 import Lists.*
+
 import u02.Optionals.Option.*
 
 class ListTest:
@@ -45,3 +46,8 @@ class ListTest:
   @Test def testMax() =
     assertEquals(Some(30), max(Cons(10, Cons(30, Cons(20, Nil())))))
     assertEquals(None(), max(Nil()))
+
+  import u02.Modules.Person.*
+
+  @Test def testPersonList() =
+    assertEquals(Cons("pps", Cons("pcd", Nil())), getCourses(Cons(Student("A", 2022), Cons(Teacher("B", "pps"), Cons(Teacher("C", "pps"), Cons(Teacher("D", "pcd"), Nil()))))))
