@@ -51,6 +51,15 @@ object Lists extends App:
         case false => Nil()
       )
 
+    import u02.Optionals.*
+    import u02.Optionals.Option.*
+
+    def max(l: List[Int]): Option[Int] = l match
+      case Cons(h, t) => max(t) match
+        case Some(x: Int) if x > h => Some(x)
+        case _ => Some(h)
+      case Nil() => None()
+
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
