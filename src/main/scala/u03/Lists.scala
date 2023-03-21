@@ -41,6 +41,10 @@ object Lists extends App:
         case Nil() => Nil()
       case Nil() => Nil()
 
+    def mapWithFM[A, B](l: List[A])(f: A => B): List[B] = l match
+      case list => flatMap(list)(a => Cons(f(a), Nil()))
+      case Nil() => Nil()
+
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
