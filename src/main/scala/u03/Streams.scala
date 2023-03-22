@@ -1,6 +1,6 @@
 package u03
 
-object Streams extends App :
+object Streams extends App:
 
   import Lists.*
 
@@ -36,6 +36,15 @@ object Streams extends App :
 
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
+
+    def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
+      case (stream, 0) => stream
+      case (Cons(_, t), n) => drop(t())(n - 1)
+      case _ => Empty()
+      
+    def constant[A](el: A): Stream[A] =
+      cons(el, constant(el))
+
 
   end Stream
 
