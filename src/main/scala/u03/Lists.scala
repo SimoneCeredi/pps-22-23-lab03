@@ -76,6 +76,12 @@ object Lists extends App:
       case Cons(h, t) => foldLeft(t)(op(default, h))(op)
       case Nil() => default
 
+
+    //    def foldRight[A, B](l: List[A])(default: B)(op: (A, B) => B): B = l match
+    //      case Cons(h, Nil()) => foldLeft(Cons(h, Nil()))(default)((a, b) => op(b, a))
+    //      case Cons(h, t) => foldRight(Cons(h, Nil()))(foldRight(t)(default)(op))(op)
+    //      case Nil() => default
+
     def foldRight[A, B](l: List[A])(default: B)(op: (A, B) => B): B = l match
       case Cons(h, t) => op(h, foldRight(t)(default)(op))
       case Nil() => default
