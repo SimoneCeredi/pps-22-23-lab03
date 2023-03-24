@@ -1,5 +1,7 @@
 package u03
 
+import scala.annotation.tailrec
+
 object Streams extends App:
 
   import Lists.*
@@ -38,6 +40,7 @@ object Streams extends App:
       cons(init, iterate(next(init))(next))
 
     // Task 5
+    @tailrec
     def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
       case (stream, 0) => stream
       case (Cons(_, t), n) => drop(t())(n - 1)
