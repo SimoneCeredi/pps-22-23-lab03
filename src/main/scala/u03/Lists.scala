@@ -26,23 +26,26 @@ object Lists extends App:
       case Cons(_, t) => filter(t)(pred)
       case Nil() => Nil()
 
+    // Task 1a
     @tailrec
     def drop[A](l: List[A], n: Int): List[A] = (l, n) match
       case (Nil(), _) => Nil()
       case (l, 0) => l
       case (Cons(_, t), n) => drop(t, n - 1)
 
+    // Task 1b
     def append[A](left: List[A], right: List[A]): List[A] = left match
       case Cons(h, t) => Cons(h, append(t, right))
       case Nil() => right
 
+    // Task 1c
     def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = l match
       case Cons(h, t) => f(h) match
         case Cons(head, tail) => append(Cons(head, tail), flatMap(t)(f))
         case Nil() => flatMap(t)(f)
       case Nil() => Nil()
 
-
+    // Task 1d
     def mapWithFM[A, B](l: List[A])(f: A => B): List[B] = l match
       case Cons(h, t) => flatMap(Cons(h, t))(x => Cons(f(x), Nil()))
       case Nil() => Nil()
@@ -56,6 +59,7 @@ object Lists extends App:
     import u02.Optionals.*
     import u02.Optionals.Option.*
 
+    // Task 2
     def max(l: List[Int]): Option[Int] = l match
       case Cons(h, t) => max(t) match
         case Some(x: Int) if x > h => Some(x)
@@ -65,12 +69,14 @@ object Lists extends App:
     import u02.Modules.Person
     import u02.Modules.Person.*
 
+    // Task 3
     def getCourses(l: List[Person]): List[String] =
       flatMap(l)(p => p match
         case Teacher(_, course) => Cons(course, Nil())
         case Student(_, _) => Nil()
       )
 
+    // Task 4
     @tailrec
     def foldLeft[A, B](l: List[A])(default: B)(op: (B, A) => B): B = l match
       case Cons(h, t) => foldLeft(t)(op(default, h))(op)
