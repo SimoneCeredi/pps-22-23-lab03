@@ -28,10 +28,9 @@ object Lists extends App:
 
     // Task 1a
     @tailrec
-    def drop[A](l: List[A], n: Int): List[A] = (l, n) match
-      case (Nil(), _) => Nil()
-      case (l, 0) => l
-      case (Cons(_, t), n) => drop(t, n - 1)
+    def drop[A](l: List[A], n: Int): List[A] = l match
+      case Cons(_, t) if n > 0 => drop(t, n - 1)
+      case _ => l
 
     // Task 1b
     def append[A](left: List[A], right: List[A]): List[A] = left match

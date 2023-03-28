@@ -32,8 +32,8 @@ object Streams extends App:
       case Cons(head, tail) => filter(tail())(pred)
       case _ => Empty()
 
-    def take[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
-      case (Cons(head, tail), n) if n > 0 => cons(head(), take(tail())(n - 1))
+    def take[A](stream: Stream[A])(n: Int): Stream[A] = stream match
+      case Cons(head, tail) if n > 0 => cons(head(), take(tail())(n - 1))
       case _ => Empty()
 
     def iterate[A](init: => A)(next: A => A): Stream[A] =
